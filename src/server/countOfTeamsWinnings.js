@@ -1,4 +1,4 @@
-function readMatchData() {
+function readMatchDataForWinnings() {
   const fileReader = require("fs");
   matchObject = fileReader.readFileSync("../data/matches.csv")
   var matchArray = matchObject.toString().split("\n");
