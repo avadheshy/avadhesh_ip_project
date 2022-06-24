@@ -3,40 +3,50 @@ function readMatchDataForPlayer() {
     matchObject = fileReader.readFileSync("../data/matches.csv")
     var matchArray = matchObject.toString().split("\n");
     let headers = matchArray[0].split(",")
-    playeOfTheMatchIndex = 13
-    seasonIndex = 1
+    let playeOfTheMatchIndex = 13
+    let seasonIndex = 1
     let playerOfTheMatchData= {}
     for (let matchRow = 1; matchRow < matchArray.length - 1; matchRow++) {
       let eachMatchData = matchArray[matchRow].split(",")
       let playerOfTheMatch = eachMatchData[playeOfTheMatchIndex]
       let season = eachMatchData[seasonIndex]
-
+  
+    
       if (playerOfTheMatchData[season] !== undefined)
       {
-        if(playerOfTheMatchData[season][playerOfTheMatch]!==undefined)
+        if(playerOfTheMatchData[season][playerOfTheMatch]!== undefined)
         {
             playerOfTheMatchData[season][playerOfTheMatch]+=1
-            console.log(playerOfTheMatchData[season][playerOfTheMatch])
+
         }
         else
         {
-            playerOfTheMatchData[season][playerOfTheMatch]+=1
+            playerOfTheMatchData[season][playerOfTheMatch]=1
             
         }
 
       }
       else{
-            playerOfTheMatchData[season]={playerOfTheMatch:1}
-            console.log(playerOfTheMatchData[season][playerOfTheMatch])
+            playerOfTheMatchData[season]={}
+            playerOfTheMatchData[season][playerOfTheMatch]=1
+
       }
       
     }
- // for(let i in playerOfTheMatchData){
-    //console.log(i,playerOfTheMatchData[i])
-  //}
-    //headers = ['teamName', 'totalWinnings']
-    //let json = JSON.stringify(countOfTeamsMatchWinningsWithTossWinning);
-    //fileReader.writeFileSync('teamWinningCount.json', json)
+    let playes_name=[]
+    for(let i in playerOfTheMatchData)
+    {
+      obj=playerOfTheMatchData[i]
+      let max_key=Object.keys(obj).reduce(function(a, b){ return obj[a] > obj[b] ? a : b });
+      playes_name.push([i,max_key,obj[max_key]])
+    }
+    for(let i in playes_name){
+      console.log(playes_name[i])
+    }
+    
+    headers = ['season','batsman','mumberOfTimes']
+    let json = JSON.stringify(playes_name);
+    fileReader.writeFileSync('manOfTheMatch.json', json)
   
   }
   
