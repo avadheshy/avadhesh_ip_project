@@ -25,4 +25,4 @@ function readMatchDataForStrikeRate() {
   }
   
   
-  readMatchData()
+  readMatchDataForStrikeRate()

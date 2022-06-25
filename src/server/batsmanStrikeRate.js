@@ -30,21 +30,21 @@ function readMatchDataForstrikeRate() {
         let runs=parseInt(eachDelivery[runIndex])
         let batsman=eachDelivery[batsmanIndex]
         let id = parseInt(eachDelivery[idIndex])
-        let season=0
+        let season=1
       
-        for(const year of Object.keys(matchId))
+        for(const key of Object.keys(matchId))
         { 
     
-            if( matchId[year].includes(id))
+            if( matchId[key].includes(id))
             {
-                season=year        
+                season=key 
+                break;       
             }
             
         }
-        console.log(season)
-        if(batsmanData[season]!=undefined)
+        if(batsmanData[season]!==undefined)
         {
-            if(batsmanData[season][batsman]!=undefined)
+            if(batsmanData[season][batsman]!==undefined)
             {
                 batsmanData[season][batsman][0]+=1
                 batsmanData[season][batsman][1]+=runs
@@ -61,11 +61,28 @@ function readMatchDataForstrikeRate() {
             batsmanData[season][batsman]=[1,runs]
         }
     }
+    batsmanStrikeRate={}
+    for(const season of Object.keys(batsmanData))
+    {
+        for(const player of Object.keys(batsmanData[season])){
+            let ball = parseInt(batsmanData[season][player][0])
+            let run=parseInt(batsmanData[season][player][1])
+            let strike=run*100/ball
+            if(batsmanStrikeRate[season]!==undefined)
+            {
+                batsmanStrikeRate[season][player]=strike
+            }
+            else{
+                batsmanStrikeRate[season]={}
+                batsmanStrikeRate[season][player]=strike
+            }
+         }
+    }
 
 
-    //console.log( batsmanData)
-    /*let json = JSON.stringify(playerDismissal);
-    fileReader.writeFileSync('playerDismissal.json', json)*/
+    
+    let json = JSON.stringify(batsmanStrikeRate);
+    fileReader.writeFileSync('batsnanStrikeRate.json', json)
   
   
 }
