@@ -33,10 +33,10 @@ function readMatchDataForPlayerDismissal() {
         bestBowler=Object.keys(bowlerData).reduce(function(a, b){ return bowlerData[a][1]/bowlerData[a][0] < bowlerData[b][1]/bowlerData[b][1] ? a : b });
     }
         
-    console.log(bestBowler)
 
-    //let json = JSON.stringify(playerDismissal);
-    //fileReader.writeFileSync('playerDismissal.json', json)*/
+
+    let json = JSON.stringify(bestBowler);
+    fileReader.writeFileSync('../public/besteconomicalBowler.json', json)
   
   
 }

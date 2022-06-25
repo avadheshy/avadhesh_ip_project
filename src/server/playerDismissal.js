@@ -30,15 +30,17 @@ function readMatchDataForPlayerDismissal() {
     }
 
     }
-    let playerDismissal=[]
+    let playerDismissal={}
     for(let i in playerDismissaldata)
     {
         obj=playerDismissaldata[i]
         let max_key=Object.keys(obj).reduce(function(a, b){ return obj[a] > obj[b] ? a : b });
-        playerDismissal.push([i,max_key,obj[max_key]]) 
+        playerDismissal[i]={}
+        playerDismissal[i][max_key]=obj[max_key]
+        //playerDismissal.push([i,max_key,obj[max_key]]) 
     }
     let json = JSON.stringify(playerDismissal);
-    fileReader.writeFileSync('playerDismissal.json', json)
+    fileReader.writeFileSync('../public/playerDismissal.json', json)
   
   
 }

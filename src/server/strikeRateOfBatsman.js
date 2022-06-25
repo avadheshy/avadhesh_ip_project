@@ -21,7 +21,7 @@ function readMatchDataForStrikeRate() {
   
     headers = ['teamName', 'totalWinnings']
     let json = JSON.stringify(countOfTeamsMatchWinningsWithTossWinning);
-    fileReader.writeFileSync('teamWinningCount.json', json);
+    fileReader.writeFileSync('../public/teamWinningCount.json', json);
   }
   
   

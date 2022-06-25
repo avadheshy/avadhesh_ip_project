@@ -82,7 +82,7 @@ function readMatchDataForstrikeRate() {
 
     
     let json = JSON.stringify(batsmanStrikeRate);
-    fileReader.writeFileSync('batsnanStrikeRate.json', json)
+    fileReader.writeFileSync('../public/batsnanStrikeRate.json', json)
   
   
 }

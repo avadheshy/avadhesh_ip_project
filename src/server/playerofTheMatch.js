@@ -33,20 +33,17 @@ function readMatchDataForPlayer() {
       }
       
     }
-    let playes_name=[]
+    let playes_name={}
     for(let i in playerOfTheMatchData)
     {
       obj=playerOfTheMatchData[i]
       let max_key=Object.keys(obj).reduce(function(a, b){ return obj[a] > obj[b] ? a : b });
-      playes_name.push([i,max_key,obj[max_key]])
+      //playes_name.push([i,max_key,obj[max_key]])
+      playes_name[i]={}
+      playes_name[i][max_key]=obj[max_key]
     }
-    for(let i in playes_name){
-      console.log(playes_name[i])
-    }
-    
-    headers = ['season','batsman','mumberOfTimes']
     let json = JSON.stringify(playes_name);
-    fileReader.writeFileSync('manOfTheMatch.json', json)
+    fileReader.writeFileSync('../public/manOfTheMatch.json', json)
   
   }
   
